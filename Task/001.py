@@ -7,14 +7,14 @@
 
 # data_txt = ""
 
-# with open('text.txt', 'r', encoding='utf_8') as file:
+# with open("text.txt", "r", encoding="utf_8") as file:
 #     data_txt = file.read()
 # print(data_txt)
 
 # data_txt = data_txt.split()
 # print(data_txt)
 
-# find_txt = input('Введите текст для проверки: ')
+# find_txt = input("Введите текст для проверки: ")
 
 # result_txt = []
 
@@ -28,7 +28,7 @@ text = 'Напишите абв напиабв програбвмму прогр
     этого абв текста все вабвс слова, содерабващие содержащие "абв"'
 
 def del_some_words(text):
-    text = list(filter(lambda x: 'абв' not in x, text.split()))
+    text = list(filter(lambda x: "абв" not in x, text.split()))
     return " ".join(text)
 
 text = del_some_words(text)
