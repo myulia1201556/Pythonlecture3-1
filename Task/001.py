@@ -1,30 +1,35 @@
 # Напишите программу, удаляющую из текста все слова, содержащие ""абв"".
 
-path = "text.txt"
+# решена на семинаре, удаляются слова с задаными символами из текста
+# сохранённого в txt файле
 
-dataTxt = ""
+# path = "text.txt"
 
-with open('text.txt', 'r', encoding='utf_8') as file:
-    dataTxt = file.read()
-print(dataTxt)
+# data_txt = ""
 
-dataTxt = dataTxt.split()
-print(dataTxt)
+# with open('text.txt', 'r', encoding='utf_8') as file:
+#     data_txt = file.read()
+# print(data_txt)
 
-findTxt = input('Введите текст для проверки: ')
+# data_txt = data_txt.split()
+# print(data_txt)
 
-resultTxt = []
+# find_txt = input('Введите текст для проверки: ')
 
-for word in dataTxt:
-    if findTxt not in word:
-        resultTxt.append(word)
-print(resultTxt)
+# result_txt = []
+
+# for word in data_txt:
+#     if find_txt not in word:
+#         result_txt.append(word)
+# print(result_txt)
 
 
+text = 'Напишите абв напиабв програбвмму программу, удаляющую из \
+    этого абв текста все вабвс слова, содерабващие содержащие "абв"'
 
+def del_some_words(text):
+    text = list(filter(lambda x: 'абв' not in x, text.split()))
+    return " ".join(text)
 
-# txt = input("Введите текст через пробел:\n")
-# print(f"Исходный текст: {txt}")
-# find_txt = "абв"
-# lst = [i for i in txt.split() if find_txt not in i]
-# print(f'Результат: {" ".join(lst)}')
+text = del_some_words(text)
+print(text)
