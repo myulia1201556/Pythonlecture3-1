@@ -1,54 +1,67 @@
 # Создайте программу для игры в 'Крестики-нолики'.
 
-board = list(map(str, range(1, 10)))
+print("Игра крестики - нолики!")
+
+board = list(range(1,10))
 
 
-def draw_board():
-    print('-' * 20)
+def create_board(board):
+    print("-"*12)
     for i in range(3):
-        for k in range(3):
-            print(f"{board[k + i * 3]:^5}", end=" ")
-        print(f"\n{'-' * 20}")
-    print()
+        print("|", board[0+i*3],"|", board[1+i*3], "|", board[2+i*3], "|")
+        print('-'*12)
 
 
-def place_sign(token):
-    global board
-    while True:
-        answer = input(f"Enter a number from 1 to 9.\nSelect a position {token}? ")
-        if answer.isdigit() and int(answer) in range(1, 10):
-            answer = int(answer)
-            pos = board[answer - 1]
-            if pos not in (chr(10060), chr(11093)):
-                board[answer - 1] = chr(10060) if token == "X" else chr(11093)
-                break
+def choice(number):
+    valid = False
+    while not valid:
+        player_step = input("Ваш ход, выберите ячейку " + number + " --> ")
+        try:
+            player_step =int(player_step)
+        except:
+            print("Error")
+            continue
+        if player_step >= 1 and player_step <= 9:
+            if(str(board[player_step - 1]) not in "XO"):
+                board[player_step-1] = number
+                valid = True
             else:
-                print(f"This cell is already occupied{chr(9995)}{chr(129292)}")
+                print("Эта ячейка занята")
         else:
-            print(f"Incorrect input{chr(9940)}. Are you sure you entered a correct number?")
+            print("Попробуйте снова")
 
 
-def check_win():
-    win_coord = ((0, 1, 2), (3, 4, 5), (6, 7, 8), (0, 3, 6), (1, 4, 7), (2, 5, 8), (0, 4, 8), (2, 4, 6))
-    n = [board[x[0]] for x in win_coord if board[x[0]] == board[x[1]] == board[x[2]]]
-    return n[0] if n else n
+
+def win_step(board):
+    win_position = [(0,1,2),(3,4,5),(6,7,8),
+                    (0,3,6),(1,4,7),(2,5,8),
+                    (0,4,8),(2,4,6)]
+    win = ""
+    for i in win_position:
+        if board[i[0]] == board[i[1]] == board[i[2]] == "X":
+            win = "X"
+        if board[i[0]] == board[i[1]] == board[i[2]] == "O":
+            win = "O"
+    return win
 
 
-def main():
+def game(board):
     counter = 0
-    draw_board()
-    while True:
-        place_sign("O") if counter % 2 else place_sign("X")
-        draw_board()
-
-        if counter > 3:
-            if check_win():
-                print(f"{check_win()} - WIN{chr(127942)}{chr(127881)}!")
+    winner = False
+    while not winner:
+        create_board(board)
+        if counter % 2 == 0:
+            choice("X")
+        else:
+            choice("0")
+        counter +=1
+        if counter > 4:
+            tt_win = win_step(board)
+            if tt_win:
+                print(tt_win,"Победа")
+                winner = True
                 break
-        if counter == 8:
-            print(f"Drawn game {chr(129318)}{chr(129309)}!")
-            break
-        counter += 1
-
-
-main()
+            if counter == 9:
+                print("Победила, ДРУЖБА)")
+        create_board(board)
+game(board)
