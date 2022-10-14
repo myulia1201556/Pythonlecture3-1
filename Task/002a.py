@@ -15,7 +15,7 @@ def input_dat(name):
 
 
 def p_print(name, k, counter, value):
-    print(f"Ходил {name}, он взял {k}, теперь у него {counter}. Осталось на столе {value} конфет.")
+    print(f"{name}, вы взяли {k} конфет, теперь у вас {counter} конфет. На столе осталось {value} конфет.")
 
 player1 = input("Введите имя первого игрока: ")
 player2 = input("Введите имя второго игрока: ")
@@ -44,6 +44,6 @@ while value > 28:
         p_print(player2, k, counter2, value)
 
 if flag:
-    print(f"Выиграл {player1}")
+    print(f"Выиграл {player1}, поздравляю!")
 else:
-    print(f"Выиграл {player2}")
+    print(f"Выиграл {player2}, поздравляю!")
