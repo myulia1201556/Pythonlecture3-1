@@ -17,7 +17,7 @@ def choice(number):
     while not valid:
         player_step = input("Ваш ход, выберите ячейку " + number + " --> ")
         try:
-            player_step =int(player_step)
+            player_step = int(player_step)
         except:
             print("Error")
             continue
@@ -31,18 +31,23 @@ def choice(number):
             print("Попробуйте снова")
 
 
-
 def win_step(board):
     win_position = [(0,1,2),(3,4,5),(6,7,8),
                     (0,3,6),(1,4,7),(2,5,8),
                     (0,4,8),(2,4,6)]
     win = ""
     for i in win_position:
-        if board[i[0]] == board[i[1]] == board[i[2]] == "X":
+        if board[i[0]] == "X" and board[i[1]] =="X"and board[i[2]] == "X":
             win = "X"
-        if board[i[0]] == board[i[1]] == board[i[2]] == "O":
+        if board[i[0]] == "O" and board[i[1]] == "O" and board[i[2]] == "O":
             win = "O"
     return win
+
+    for i in win_position:
+        if board[i[0]] == board[i[1]] == board[i[2]]:
+            return board[i[0]]
+    return False
+
 
 
 def game(board):
@@ -56,12 +61,20 @@ def game(board):
             choice("0")
         counter +=1
         if counter > 4:
-            tt_win = win_step(board)
-            if tt_win:
-                print(tt_win,"Победа")
+            tmp = win_step(board)
+            if tmp:
+                print(tmp,"Победа")
                 winner = True
                 break
             if counter == 9:
-                print("Победила, ДРУЖБА)")
+                print("Ничья!)")
         create_board(board)
+       
+
 game(board)
+
+
+
+
+
+
